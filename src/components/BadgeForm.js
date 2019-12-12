@@ -9,7 +9,7 @@ state ={};
       //      value:e.target.value
       //  });
       this.setState(
-          {
+          {  
               [e.target.name]: e.target.value,
           }
       );
@@ -22,6 +22,7 @@ state ={};
     handleSubmit = (e) => {
         e.preventDefault();
         console.log('Form was submitted');
+        console.log(this.state);
       };
       
     render(){
@@ -33,17 +34,17 @@ state ={};
                     <div className="form-group">
                         <label >First Name</label>
                         <input
-                            value={this.state.firstname}
+                            value={this.props.formValues.firstname}
                             type="text"
-                            onChange={this.handleChange}
+                            onChange={this.props.onChange}
                             className="form-control"
                             name="firstname"
                         />
                         <label >Last Name</label>
                         <input
-                            value={this.state.lastname}
+                            value={this.props.formValues.lastname}
                             type="text"
-                            onChange={this.handleChange}
+                            onChange={this.props.onChange}
                             className="form-control"
                             name="lastname"
                         />  
@@ -52,9 +53,9 @@ state ={};
                     <div className="form-group">
                         <label >email</label>
                         <input
-                            value={this.state.email}
+                            value={this.props.formValues.email}
                             type="email"
-                            onChange={this.handleChange}
+                            onChange={this.props.onChange}
                             className="form-control"
                             name="email"
                         />
@@ -63,9 +64,9 @@ state ={};
                     <div className="form-group">
                         <label >Job Title</label>
                         <input
-                            value={this.state.jobTitle}
+                            value={this.props.formValues.jobTitle}
                             type="text"
-                            onChange={this.handleChange}
+                            onChange={this.props.onChange}
                             className="form-control"
                             name="jobTitle"
                         />
@@ -74,9 +75,9 @@ state ={};
                     <div className="form-group">
                         <label >Twitter</label>
                         <input
-                            value={this.state.twitter}
+                            value={this.props.formValues.twitter}
                             type="text"
-                            onChange={this.handleChange}
+                            onChange={this.props.onChange}
                             className="form-control"
                             name="twitter"
                         />
