@@ -34,12 +34,19 @@ class BadgeItem extends React.Component{
 
 class BadgeList extends React.Component{
 render(){
+    if(this.props.badges.length===0){
+        return(
+        <React.Fragment>
+            <h3>No encontramos ningun badge</h3>
+        </React.Fragment>
+        )
+    }
     return(
         <div className="BadgesList">
         <ul className="list-unstyled">
                     {this.props.badges.map((badge)=>{
                         return(
-                              <BadgeItem badge={badge}/>
+                              <BadgeItem badge={badge} key={badge.id}/>
                         )    
                     })}
         </ul>

@@ -1,20 +1,56 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-
-import Navbar from '../components/Navbar'
-import confLogo from '../images/badge-header.svg'
-import './css/Badges.css'
-import badges from '../json/default_badges.json'
-import BadgeList from '../components/BadgesList'
+import confLogo from '../images/badge-header.svg';
+import './css/Badges.css';
+// import badges from '../json/default_badges.json'
+import BadgeList from '../components/BadgesList';
+import api from '../api';
+import PageLoader from '../components/PageLoader';
+import PageError from '../components/PageError';
 
 class Badges extends React.Component {
+
     state ={
-        data: badges
+        loading: true,
+        error: null,
+        data: undefined
+    };
+
+
+    componentDidMount(){
+        this.fetchData()
+        
+    }
+
+    fetchData = async () =>{
+        this.setState({
+            loading:true,
+            error:null  
+        });
+        try{
+            const data = await api.badges.list();
+            this.setState({loading: false, data:data});
+        }catch(error){
+            this.setState({loading: false, error:error});    
+        }
+
+
+    }
+
+    componentWillUnmount(){
+        clearTimeout(this.timeoutId)    
     }
     render(){
+        if(this.state.loading===true){
+            return <PageLoader/>;
+        }
+        if(this.state.error){
+            return <PageError error={this.state.error}/>    
+        }
+
         return(
-        <div>
-            <Navbar/>
+        <React.Fragment>
+          
             <div className="Badges">
                 <div className="Badges__hero">
                   <div className="Badges__container">
@@ -35,7 +71,7 @@ class Badges extends React.Component {
                     
                 </div>
             </div>
-        </div>);
+        </React.Fragment>);
     }}
     
     export default Badges;

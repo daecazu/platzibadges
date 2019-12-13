@@ -1,6 +1,8 @@
 import React from 'react';
-import Header from '../images/badge-header.svg'
-import './css/Badge.css'
+import Header from '../images/badge-header.svg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faTwitter} from '@fortawesome/free-brands-svg-icons';
+import './css/Badge.css';
 
 
 class Badge extends React.Component {
@@ -22,7 +24,9 @@ class Badge extends React.Component {
             </div>
             <div className="Badge__section-info">
             <h3>{this.props.jobTitle}</h3>
-            <div>@{this.props.twitter}</div>
+            <div>
+            <span className="TwitterSpan"><FontAwesomeIcon icon={faTwitter} />@{this.props.twitter}</span>
+                </div>
             </div>
             <div className="Badge__footer">#platziconf</div> 
         </div>);
