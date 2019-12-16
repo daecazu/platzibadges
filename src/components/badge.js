@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '../images/badge-header.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faTwitter} from '@fortawesome/free-brands-svg-icons';
+import Gravatar from './Gravatar'
 import './css/Badge.css';
 
 
@@ -12,11 +13,7 @@ class Badge extends React.Component {
                 <img src={Header} alt="header"/>
             </div>
             <div className="Badge__section-name">
-                <img
-                className="Badge__avatar"
-                src="https://s.gravatar.com/avatar/5d5184dace9249d43513762d884d4c3a?s=80"
-                alt="Avatar"
-                />
+                <Gravatar className="Badge__avatar" email={this.props.email}/>
                 <h1>
                     {this.props.firstName}<br/>
                     {this.props.lastName}

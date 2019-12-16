@@ -19,34 +19,34 @@ state ={};
         console.log('Button was clicked');
     };
 
-    handleSubmit = (e) => {
-        e.preventDefault();
-        console.log('Form was submitted');
-        console.log(this.state);
-      };
+   // handleSubmit = (e) => {
+   //     e.preventDefault();
+   //     console.log('Form was submitted');
+   //     console.log(this.state);
+   //   };
       
     render(){
         return (
 
             <div>
-                <h1>New Attendant</h1>
-                <form onSubmit={this.handleSubmit}>
+                <h1>{this.props.title}</h1>
+                <form onSubmit={this.props.onSubmit}>
                     <div className="form-group">
                         <label >First Name</label>
                         <input
-                            value={this.props.formValues.firstname}
+                            value={this.props.formValues.firstName}
                             type="text"
                             onChange={this.props.onChange}
                             className="form-control"
-                            name="firstname"
+                            name="firstName"
                         />
                         <label >Last Name</label>
                         <input
-                            value={this.props.formValues.lastname}
+                            value={this.props.formValues.lastName}
                             type="text"
                             onChange={this.props.onChange}
                             className="form-control"
-                            name="lastname"
+                            name="lastName"
                         />  
                         <hr/>
                     </div>
@@ -84,6 +84,9 @@ state ={};
                         
                     </div>  
                       <button onClick={this.handleClick} className="btn btn-primary">Save</button>
+                {this.props.error &&(
+                    <p className="text-danger">{this.props.error.message}</p>
+                )}
                 </form>  
             </div>    
         );
