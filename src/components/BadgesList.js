@@ -33,21 +33,62 @@ class BadgeItem extends React.Component{
     }
 }
 
+function useSearchBadges(badges){
+    const [query, setQuery] = React.useState('');
+    const [filteredBadges,setFilteredBadges] = React.useState(badges);
+
+    React.useMemo(() => {
+        const result = badges.filter(badge =>{
+            return `${badge.firstName} ${badge.lastName}`
+            .toLowerCase().
+            includes(query.toLowerCase());
+        });
+
+        setFilteredBadges(result)
+
+    }, [ badges, query]);
+
+    return {query, setQuery, filteredBadges}
+}
 
 
-class BadgeList extends React.Component{
-render(){
-    if(this.props.badges.length===0){
+function BadgeList (props){
+    const badges = props.badges;
+
+    return {query, setQuery, filteredBadges} = useSearchBadges(badges);
+   
+
+    if(filteredBadges.length===0){
         return(
         <React.Fragment>
-            <h3>No encontramos ningun badge</h3>
+         <div className="BadgesList">
+            <div className="form-group">
+                <label >Filter Badges</label>
+                <input type="text" className="form-control"
+                    value={query}
+                    onChange={(e=>{
+                    setQuery(e.target.value);
+                })}/>
+            </div>
+         </div>
+            <h3>No Badges were found</h3>
         </React.Fragment>
         )
     }
     return(
         <div className="BadgesList">
+         <div className="form-group">
+         <label >Filter Badges</label>
+         <input type="text" className="form-control"
+            value={query}
+            onChange={(e=>{
+                setQuery(e.target.value);
+            })}
+         />
+            
+         </div>   
         <ul className="list-unstyled">
-                    {this.props.badges.map((badge)=>{
+                    {filteredBadges.map((badge)=>{
                         return(
                               <BadgeItem badge={badge} key={badge.id}/>
                         )    
@@ -58,6 +99,6 @@ render(){
     )
 }
 
-}
+
 
 export default BadgeList;
